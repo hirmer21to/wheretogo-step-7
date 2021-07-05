@@ -27,9 +27,11 @@ export class LectureAddComponent implements OnInit {
   }
 
   add(name: string, building: string,
-    floor: string, room: string, day: string, hours: number, minutes: number,
+    floor: string, room: string, day: string, hours: string, minutes: string,
     department?: string): void {
-    let time = { hours, minutes };
+    let hoursInt = parseInt(hours);
+    let minutesInt = parseInt(minutes);
+    let time = {hours: hoursInt, minutes: minutesInt};
     if (!name || !room || !day || !time || !building || !floor) {
       this.fieldsEmpty = true;
       return;

@@ -33,8 +33,10 @@ export class LectureDetailsComponent implements OnInit {
   }
 
   save(): void{
-    this.lectureService.updateLecture(this.lecture)
-    .subscribe(() => this.goBack());
+    if(this.lecture) {
+      this.lectureService.updateLecture(this.lecture)
+          .subscribe(() => this.goBack());
+    }
   }
 
   goBack(): void{
