@@ -10,7 +10,7 @@ import { Location } from '@angular/common';
   styles: []
 })
 export class LectureDetailsComponent implements OnInit {
-  @Input() lecture: Lecture;
+  @Input() lecture: Lecture | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -23,9 +23,13 @@ export class LectureDetailsComponent implements OnInit {
   }  
   
   getLecture(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.lectureService.getLecture(id)
-    .subscribe(lecture => this.lecture = lecture);
+    const id = this.route.snapshot.paramMap.get('id');
+    // check if id is null
+    if (id !== null) {
+      this.lectureService
+        .getLecture(parseInt(id))
+        .subscribe(lecture => (this.lecture = lecture));
+    }
   }
 
   save(): void{
